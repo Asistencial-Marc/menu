@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de la Setmana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+    <div class="top-buttons">
+        <button onclick="window.history.back()">Tornar enrere</button>
+        <button class="tancament-sesio">Tancar Sessió</button>
+    </div>
+    <div class="container">
+        <h2>Menú de la Setmana</h2>
+        <div id="menu-list">
+            <!-- Aquí es mostraran els menús dinàmicament -->
+        </div>
+        <h3>Selecciona el teu menú:</h3>
+        <form id="menu-selection-form">
+            <select id="select-menu" required>
+                <!-- Les opcions del menú es faran dinàmicament -->
+            </select>
+            <button type="submit">Seleccionar</button>
+        </form>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>

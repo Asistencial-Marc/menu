@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veure Dietes</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+  <div class="container">
+    <div class="top-buttons">
+      <button onclick="window.history.back()">Tornar enrere</button>
+      <button class="tancament-sesio">Tancar Sessió</button>
+    </div>
+
+    <h2>Veure Dietes del Mes</h2>
+
+    <label for="month">Selecciona el mes:</label>
+    <input type="month" id="month">
+
+    <div id="menu-list"></div>
+  </div>
+
+  <script src="veure_dietas.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

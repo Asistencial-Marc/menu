@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleccionar Menú</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+  <div class="logo-box">
+    <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+  </div>
+  <div class="container">
+    <div class="top-buttons">
+      <button onclick="window.history.back()">Tornar enrere</button>
+      <button class="tancament-sesio">Tancar Sessió</button>
+  </div>
+    <h2>Selecciona el teu menú</h2>
+    
+    <!-- Calendario para seleccionar el día -->
+    <label for="select-day">Escull el dia:</label>
+    <input type="date" id="select-day" required>
+
+    <!-- Mostrar el menú del día seleccionado -->
+    <div id="menu-options">
+      <h3>Menú del dia:</h3>
+      <p id="menu-details">Selecciona una data para ver el menú.</p>
+    </div>
+    
+    <!-- Mostrar las selecciones -->
+    <h3>Les teves seleccions:</h3>
+    <form id="menu-selection-form">
+      <label for="firstOption">Primer plat:</label>
+      <select id="firstOption" required>
+        <option value="">Selecciona un primer plat</option>
+      </select>
+      
+      <label for="secondOption">Segon plat:</label>
+      <select id="secondOption" required>
+        <option value="">Selecciona un segon plat</option>
+      </select>
+      
+      <label for="dessertOption">Postres:</label>
+      <select id="dessertOption" required>
+        <option value="">Selecciona un postre</option>
+      </select>
+      
+      <button type="submit">Guardar selecció</button>
+    </form>
+  </div>
+
+  <script src="menu_usuari.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

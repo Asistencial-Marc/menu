@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar Selecció de Menú</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+  <div class="container">
+    <div class="top-buttons">
+      <button onclick="window.history.back()">Tornar enrere</button>
+      <button class="tancament-sesio">Tancar Sessió</button>
+    </div>
+
+    <h2>Modificar selecció de menú</h2>
+
+    <label for="select-day">Escull el dia a modificar:</label>
+    <input type="date" id="select-day">
+
+    <form id="modify-menu-form" style="display:none">
+      <label for="firstOption">Primer plat:</label>
+      <select id="firstOption" required></select>
+
+      <label for="secondOption">Segon plat:</label>
+      <select id="secondOption" required></select>
+
+      <label for="dessertOption">Postres:</label>
+      <select id="dessertOption" required></select>
+
+      <button type="submit">Guardar canvis</button>
+    </form>
+  </div>
+
+  <script src="menu_modificar_sel.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

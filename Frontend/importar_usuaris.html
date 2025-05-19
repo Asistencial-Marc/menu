@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Importar Usuaris</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <div class="logo-box">
+    <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+  </div>
+  <div class="container">
+    <div class="top-buttons">
+      <button onclick="window.history.back()">Tornar enrere</button>
+      <button class="tancament-sesio">Tancar Sessió</button>
+  </div>
+    <h2>Importar Usuaris</h2>
+
+    <!-- Botón para elegir archivo -->
+    <input type="file" id="file-csv" accept=".csv">
+    <br><br>
+
+    <!-- Botón para importar -->
+    <button id="importar-usuarios">Importar usuaris</button>
+  </div>
+
+  <script src="importar_usuaris.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

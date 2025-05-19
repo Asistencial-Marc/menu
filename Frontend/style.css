@@ -1,0 +1,202 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    margin: 20px auto;
+}
+
+/* Títulos */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px 0;
+    border-radius: 4px;
+    border-style: solid;
+    border: 2px;
+    background-color: #c31630;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    transition: 0.5s;
+    background-color: #FFF;
+    border-color: #c31630;
+    border-style: solid;
+    border-radius: 4px;
+    color: #c31630 ;
+}
+
+/* Inputs y selects */
+input, select {
+    width: 95%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Contenedor de los dos botones de arriba */
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px; /* Añadido gap */
+}
+
+/* Botones dentro del top-buttons */
+.top-buttons button {
+    width: 48%;
+    margin: 0;
+}
+
+/* Contenedor de botones de sección */
+.seccio-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Separación real entre botones */
+}
+
+.seccio {
+    flex: 1;
+    background-color: #c31630;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin: 0; /* Quitamos márgenes aquí */
+}
+
+/* Cada día del menú */
+.day-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Título de cada día */
+.day-item h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+/* Opciones de menú */
+.day-item p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Opciones no disponibles */
+.not-available {
+    color: red;
+    font-weight: bold;
+}
+
+/* Estilo especial para textos */
+.container p {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+}
+/* Arreglar bordes de los botones seccio */
+.seccio:first-child {
+    margin-right: 5px; /* Pequeño margen derecho */
+}
+
+.seccio:last-child {
+    margin-left: 5px; /* Pequeño margen izquierdo */
+}
+
+.swal-custom-popup {
+    border-radius: 12px;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    width: 50%; 
+    margin: 0;
+  }
+  
+  .swal-custom-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+  }
+  .swal-custom-text {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .swal-progress-bar {
+    background: #eed2cb !important;
+  }
+  
+
+  .swal-custom-error-popup {
+    border-radius: 12px;
+    border: 2px solid #af4c4c;
+    box-shadow: 0 0 10px rgba(175, 76, 76, 0.5);
+    width: 50%; 
+    margin: 0;
+  }
+  
+  .swal-custom-error-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #af544c;
+    text-align: center;
+  }
+  .swal-custom-error-text {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .logo-box {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    width: 190px;
+    height: 190px;
+     /* Puedes quitar esto cuando esté listo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }

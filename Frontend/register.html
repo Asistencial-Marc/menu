@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuari</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+    <div class="container">
+        <div class="top-buttons">
+            <button onclick="window.history.back()">Tornar enrere</button>
+            <button class="tancament-sesio">Tancar Sessió</button>
+        </div>
+        <h2>Registrar Usuari</h2>
+        <form id="register-form">
+            <input type="text" id="codi" placeholder="Codi empleat" required>
+            <input type="text" id="name" placeholder="Nom" required>
+            <input type="text" id="username" placeholder="Nom d'usuari" required>
+            <input type="email" id="email" placeholder="Correu electrònic" required>
+            <input type="password" id="password" placeholder="Contrasenya" required>
+            <input type="password" id="password2" placeholder="Verificació Contrasenya" required>
+            <select id="role" required>
+                <option value="cocinero">Cuiner</option>
+                <option value="empleado">Empleat</option>
+            </select>
+            <button type="submit">Registrar</button>
+        </form>
+        <center>
+        <p>Ja tens compte? <a href="login.html">Inicia sessió aquí</a></p>
+        </center>
+    </div>
+    <script src="register.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

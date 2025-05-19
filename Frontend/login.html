@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sessió</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+      
+    <div class="container">
+        <h2>Iniciar sessió</h2>
+
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Nom d'usuari" required>
+            <input type="password" id="password" placeholder="Contrasenya" required>
+            <button type="submit">Iniciar sessió</button>
+        </form>
+
+        <!-- Aquí ponemos el enlace de recuperar contraseña -->
+        <p style="text-align: center; margin-top: 10px;">
+            <a href="forgot_password.html">Has oblidat la contrasenya?</a>
+        </p>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
