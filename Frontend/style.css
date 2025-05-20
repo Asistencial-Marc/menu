@@ -87,15 +87,26 @@ input, select {
     margin: 0; /* Quitamos márgenes aquí */
 }
 
-/* Cada día del menú */
-.day-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 10px 0;
-    text-align: center;
+
+  #menu-week {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
 }
+
+/* Ajustes de las tarjetas de día para que se vean bien en horizontal */
+.day-item {
+  min-width: 250px;
+  flex-shrink: 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+}
+
 
 /* Título de cada día */
 .day-item h3 {
