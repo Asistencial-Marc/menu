@@ -69,9 +69,9 @@ async function createMenuForWeek() {
     if (menuData) {
       dayDiv.innerHTML = `
         <h3>${dayName} - ${formattedDate}</h3>
-        <p><strong>Primer plat:</strong> opció 1: ${menuData.firstOption[0]} | opció 2: ${menuData.firstOption[1]}</p>
-        <p><strong>Segon plat:</strong> opció 1: ${menuData.secondOption[0]} | opció 2: ${menuData.secondOption[1]}</p>
-        <p><strong>Postres:</strong> opció 1: ${menuData.dessertOption[0]} | opció 2: ${menuData.dessertOption[1]}</p>
+        <p><strong>Primer plat:</strong>  1: ${menuData.firstOption[0]} |  2: ${menuData.firstOption[1]}</p>
+        <p><strong>Segon plat:</strong>  1: ${menuData.secondOption[0]} |  2: ${menuData.secondOption[1]}</p>
+        <p><strong>Postres:</strong>  1: ${menuData.dessertOption[0]} |  2: ${menuData.dessertOption[1]}</p>
       `;
     } else {
       dayDiv.innerHTML = `
