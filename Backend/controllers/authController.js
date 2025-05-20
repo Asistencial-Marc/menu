@@ -98,7 +98,8 @@ exports.forgotPassword = async (req, res) => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1h
         await user.save();
 
-        const resetUrl = `http://localhost:5000/reset_password.html?token=${token}`;
+        //http://localhost:5000/reset_password.html?token=${token}
+        const resetUrl = `https://menu-3io3.onrender.com/reset_password.html?token=${token}`;
 
         await transporter.sendMail({
             from: `"No Reply" <${process.env.EMAIL_USER}>`,
