@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.getElementById('importar-usuarios').addEventListener('click', async () => {
   const token = localStorage.getItem('token');
   const fileInput = document.getElementById('file-csv');
@@ -28,11 +29,10 @@ document.getElementById('importar-usuarios').addEventListener('click', async () 
   formData.append('csv', file);
 
   try {
-    const res = await fetch('http://localhost:5000/api/admin/importar-usuaris', {
+    const res = await fetch(`${API_BASE_URL}/api/admin/importar-usuaris`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`
-        // NO pongas 'Content-Type': multipart/form-data, fetch lo pone automáticamente
       },
       body: formData
     });

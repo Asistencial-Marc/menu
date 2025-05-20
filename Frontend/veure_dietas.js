@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (!token) return (window.location.href = '/login');
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let day = 1; day <= daysInMonth; day++) {
         const date = `${year}-${month.padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   
-        const response = await fetch(`http://localhost:5000/api/menu/${date}`, {
+        const response = await fetch(`${API_BASE_URL}/api/menu/${date}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
   

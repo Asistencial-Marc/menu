@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 document.getElementById('reset-form').addEventListener('submit', async function(event) {
     event.preventDefault();
   
@@ -24,7 +26,7 @@ document.getElementById('reset-form').addEventListener('submit', async function(
     }
   
     try {
-      const response = await fetch('http://localhost:5000/api/auth/reset-password', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, newPassword })

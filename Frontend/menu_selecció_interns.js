@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.addEventListener('DOMContentLoaded', function() {
   const token = localStorage.getItem('token');
 
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!selectedDay) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/menu_seleccionat/selections/${selectedDay}`, {
+      const response = await fetch(`${API_BASE_URL}/api/menu_seleccionat/selections/${selectedDay}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

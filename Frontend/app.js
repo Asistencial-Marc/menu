@@ -1,11 +1,13 @@
 // Iniciar sessió (solo en login.html)
+import { API_BASE_URL } from './config.js';
+
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -41,7 +43,7 @@ document.getElementById('menu-form').addEventListener('submit', async function(e
         return;
     }
 
-    const response = await fetch('http://localhost:5000/api/menu', {
+    const response = await fetch(`${API_BASE_URL}/api/menu`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -72,7 +74,7 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
         return;
     }
 
-    const response = await fetch(`http://localhost:5000/api/menu/${selectedMenu}`, {
+    const response = await fetch(`${API_BASE_URL}/api/menu/${selectedMenu}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`  // Enviar el token en los headers

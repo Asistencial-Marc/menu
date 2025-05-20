@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (!token) return window.location.href = '/login';
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!selectedDay) return;
   
       try {
-        const res = await fetch(`http://localhost:5000/api/menu_seleccionat/day/${selectedDay}`, {
+        const res = await fetch(`${API_BASE_URL}/api/menu_seleccionat/day/${selectedDay}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
   
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
   
             if (confirm.isConfirmed) {
-                const delRes = await fetch(`http://localhost:5000/api/menu_seleccionat/delete/${selectedDay}`, {
+                const delRes = await fetch(`${API_BASE_URL}/api/menu_seleccionat/delete/${selectedDay}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                   });

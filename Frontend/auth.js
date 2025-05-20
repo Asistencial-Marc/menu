@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 // Función para cerrar sesión
 function tancar_sesio() {
     console.log("Cerrar sesión");
@@ -21,7 +22,7 @@ async function comprovarToken() {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/api/auth/verificacio', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/verificacio`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

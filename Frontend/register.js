@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './config.js';
+
 document.getElementById('register-form').addEventListener('submit', async function(event) {
     event.preventDefault();  // Evitar que el formulario se envíe de forma predeterminada
 
@@ -31,7 +33,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
     // Log de los datos que se van a enviar
     console.log("Datos del formulario:", { codi, name, email, password, role });
 
-    const response = await fetch('http://localhost:5000/api/auth/register', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

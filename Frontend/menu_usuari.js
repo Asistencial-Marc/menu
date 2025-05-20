@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 // Cuando cambia el día seleccionado
 document.getElementById('select-day').addEventListener('change', async function(event) {
   const selectedDate = event.target.value;
@@ -15,7 +16,7 @@ document.getElementById('select-day').addEventListener('change', async function(
   }
 
   // Hacer la solicitud para obtener el menú del día seleccionado enviando el token
-  const response = await fetch(`http://localhost:5000/api/menu/${selectedDate}`, {
+  const response = await fetch(`${API_BASE_URL}/api/menu/${selectedDate}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -94,7 +95,7 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
     return;
   }
 
-  const checkResponse = await fetch(`http://localhost:5000/api/menu_seleccionat/check/${selectedDate}`, {
+  const checkResponse = await fetch(`${API_BASE_URL}/api/menu_seleccionat/check/${selectedDate}`, {
     method: 'GET',
     headers: { 'Authorization': `Bearer ${token}` }
   });
@@ -110,7 +111,7 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
   }
 
   // Realizar la solicitud para guardar la selección en la base de datos
-  const response = await fetch('http://localhost:5000/api/menu_seleccionat/select', {
+  const response = await fetch(`${API_BASE_URL}/api/menu_seleccionat/select`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

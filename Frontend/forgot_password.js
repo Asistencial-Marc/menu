@@ -1,10 +1,11 @@
+import { API_BASE_URL } from './config.js';
 document.getElementById('forgot-form').addEventListener('submit', async function(event) {
     event.preventDefault();
   
     const email = document.getElementById('email').value;
   
     try {
-      const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

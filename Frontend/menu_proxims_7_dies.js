@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 const menuWeekDiv = document.getElementById('menu-week');
 
 function getFormattedDate(date) {
@@ -18,7 +19,7 @@ async function fetchMenuForDate(dateString) {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/menu/${dateString}`, {
+    const response = await fetch(`${API_BASE_URL}/api/menu/${dateString}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`

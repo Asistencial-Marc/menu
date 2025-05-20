@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 // Registrar menú (solo en menu.html)
 document.getElementById('menu-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -18,7 +19,7 @@ document.getElementById('menu-form').addEventListener('submit', async function(e
         window.location.href = 'login.html';
       }
 
-    const response = await fetch('http://localhost:5000/api/menu', {
+    const response = await fetch(`${API_BASE_URL}/api/menu`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.getElementById('enviar-informe').addEventListener('click', async () => {
     const token = localStorage.getItem('token');
     const confirmar = confirm('Estàs segur que vols enviar l’informe mensual ara?');
@@ -5,7 +6,7 @@ document.getElementById('enviar-informe').addEventListener('click', async () => 
     if (!confirmar || !token) return;
   
     try {
-      const res = await fetch('http://localhost:5000/api/admin/enviar-informe', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/enviar-informe`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
