@@ -65,8 +65,20 @@ input, select {
 
 /* Botones dentro del top-buttons */
 .top-buttons button {
-    width: 48%;
+    width: 35%;
+    height: 35%;
+    background-color: white;
+    color: #c31630;
+    border: 1px;
+    border-style:solid;
+    border-color: #c31630;
     margin: 0;
+}
+
+.top-buttons button:hover{
+  transition: 0.5s;
+  background-color: #c31630 ;
+  color: white;
 }
 
 /* Contenedor de botones de sección */

@@ -35,11 +35,8 @@ router.post('/enviar-informe', authMiddleware, requireAdmin, async (req, res) =>
 
 
 // Nueva ruta para subir CSV
-router.post(
-  '/importar-usuaris',
-  authMiddleware,
-  requireAdmin,
-  upload.single('csv'),  // 👈 Aquí multer sube el archivo CSV
+router.post('/importar-usuaris',authMiddleware,requireAdmin,
+   upload.single('csv'),  // 👈 Aquí multer sube el archivo CSV
   async (req, res) => {
     try {
       console.log("Archivo recibido:", req.file);  // 👀 Mira si multer recibe el archivo
