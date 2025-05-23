@@ -13,10 +13,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: auto;
-    max-width: none;
-    margin: auto auto 20px auto;
-    text-align: center;
+    width: 450px;
+    margin: 20px auto;
 }
 
 /* Títulos */
@@ -27,7 +25,7 @@ h2 {
 
 /* Botones */
 button {
-    width: auto;
+    width: 100%;
     padding: 10px;
     margin: 8px 0 20px 0;
     border-radius: 4px;
@@ -50,7 +48,7 @@ button:hover {
 
 /* Inputs y selects */
 input, select {
-    width: auto;
+    width: 95%;
     padding: 10px;
     margin: 8px 0;
     border-radius: 4px;
@@ -62,29 +60,32 @@ input, select {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    gap: 10px;
+    gap: 10px; /* Añadido gap */
 }
 
+/* Botones dentro del top-buttons */
 .top-buttons button {
-    width: auto;
+    width: 35%;
     height: 35%;
     background-color: white;
     color: #c31630;
-    border: 1px solid #c31630;
+    border: 1px;
+    border-style:solid;
+    border-color: #c31630;
     margin: 0;
 }
 
 .top-buttons button:hover{
-    transition: 0.5s;
-    background-color: #e09b9b;
-    color: white;
+  transition: 0.5s;
+  background-color: #c31630 ;
+  color: white;
 }
 
 /* Contenedor de botones de sección */
 .seccio-container {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 10px; /* Separación real entre botones */
 }
 
 .seccio {
@@ -95,77 +96,78 @@ input, select {
     color: white;
     text-align: center;
     cursor: pointer;
-    margin: 0;
-}
-
-/* NUEVO: Mostrar menús horizontalmente y con salto de línea */
-#menu-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    padding: 20px 0;
-}
-
-#menu-week {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    padding: 20px 0;
+    margin: 0; /* Quitamos márgenes aquí */
 }
 
 
-/* Ajustes flexibles para los bloques de día */
+  #menu-week {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+/* Ajustes de las tarjetas de día para que se vean bien en horizontal */
 .day-item {
-    flex: 0 1 250px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
+  min-width: 250px;
+  flex-shrink: 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
 }
 
+
+/* Título de cada día */
 .day-item h3 {
     margin: 0 0 10px 0;
     font-size: 18px;
 }
 
+/* Opciones de menú */
 .day-item p {
     margin: 5px 0;
     font-size: 14px;
 }
 
+/* Opciones no disponibles */
 .not-available {
     color: red;
     font-weight: bold;
 }
 
+/* Estilo especial para textos */
 .container p {
     font-size: 16px;
     color: #555;
     text-align: center;
 }
+/* Arreglar bordes de los botones seccio */
+.seccio:first-child {
+    margin-right: 5px; /* Pequeño margen derecho */
+}
 
-.seccio:first-child { margin-right: 5px; }
-.seccio:last-child { margin-left: 5px; }
+.seccio:last-child {
+    margin-left: 5px; /* Pequeño margen izquierdo */
+}
 
 .swal-custom-popup {
     border-radius: 12px;
     border: 2px solid #4CAF50;
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-    width: 50%;
+    width: 50%; 
     margin: 0;
-}
-
-.swal-custom-title {
+  }
+  
+  .swal-custom-title {
     font-size: 24px;
     font-weight: bold;
     color: #4CAF50;
     text-align: center;
-}
-
-.swal-custom-text {
+  }
+  .swal-custom-text {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -173,26 +175,28 @@ input, select {
     justify-content: center;
     align-items: center;
     height: 100%;
-}
+  }
+  
+  .swal-progress-bar {
+    background: #eed2cb !important;
+  }
+  
 
-.swal-progress-bar { background: #eed2cb !important; }
-
-.swal-custom-error-popup {
+  .swal-custom-error-popup {
     border-radius: 12px;
     border: 2px solid #af4c4c;
     box-shadow: 0 0 10px rgba(175, 76, 76, 0.5);
-    width: 50%;
+    width: 50%; 
     margin: 0;
-}
-
-.swal-custom-error-title {
+  }
+  
+  .swal-custom-error-title {
     font-size: 24px;
     font-weight: bold;
     color: #af544c;
     text-align: center;
-}
-
-.swal-custom-error-text {
+  }
+  .swal-custom-error-text {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -200,58 +204,72 @@ input, select {
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.logo-box {
-    width: 100%;
+  }
+  .logo-box {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    width: 190px;
+    height: 190px;
+     /* Puedes quitar esto cuando esté listo */
     display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-}
-
-.logo-img {
-    width: 120px;
-    height: auto;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .logo-img {
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
+  }
+
+  #selected-users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-#selected-users {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 16px;
-    margin-top: 20px;
-    padding-bottom: 10px;
+
+#selected-users.horizontal-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px;
 }
 
 #selected-users p {
-    min-width: 250px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 .user-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    width: 280px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 280px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .user-card strong {
-    color: #c31630;
-    font-size: 16px;
+  color: #c31630;
+  font-size: 16px;
 }
 
 .user-card p {
-    margin: 5px 0;
-    font-size: 14px;
+  margin: 5px 0;
+  font-size: 14px;
 }

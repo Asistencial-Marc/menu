@@ -26,20 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = await response.json();
 
       if (response.ok) {
-        selectedUsersDiv.innerHTML = "<h4>Usuaris que han seleccionat aquest menú:</h4>";
+        selectedUsersDiv.innerHTML = "";
 
         if (data.users.length === 0) {
           selectedUsersDiv.innerHTML += "<p>No hi ha seleccions per aquest dia.</p>";
         } else {
           data.users.forEach(user => {
-            selectedUsersDiv.innerHTML += `
-              <p>
-                <strong>${user.name}</strong><br>
-                Primer plat: ${user.firstOption}<br>
-                Segon plat: ${user.secondOption}<br>
-                Postres: ${user.dessertOption}
-              </p>
+            const userHTML = `
+              <div class="user-card">
+                <p><strong>${user.name}</strong></p>
+                <p>Primer plat: ${user.firstOption}</p>
+                <p>Segon plat: ${user.secondOption}</p>
+                <p>Postres: ${user.dessertOption}</p>
+              </div>
             `;
+            selectedUsersDiv.innerHTML += userHTML;
           });
         }
       } else {

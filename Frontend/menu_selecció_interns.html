@@ -9,14 +9,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="logo-box">
-    <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
-  </div>
   <div class="container">
     <div class="top-buttons">
-      <button onclick="window.history.back()">Tornar enrere</button>
-      <button class="tancament-sesio">Tancar Sessió</button>
-  </div>
+            <div class="logo-box">
+                <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+            </div>
+            <button onclick="window.history.back()"><img src="media/logotip_enrere_transparent_32x32.png" alt=""></button>
+            <button class="tancament-sesio"><img src="media/logout_icon_32x32_transparent.png" alt=""></button>
+        </div>
     <h2>Menú del Dia</h2>
     <h3>Selecciona el dia per veure els menús seleccionats</h3>
 
@@ -25,7 +25,8 @@
     <input type="date" id="select-day" required>
     <button id="pdf_gen">Generar PDF</button>
     <!-- Mostrar las personas que han seleccionado el menú -->
-    <div id="selected-users"></div>
+    <div id="selected-users" class="horizontal-container"></div>
+
   </div>
 
   <script type="module" src="menu_selecció_interns.js"></script>
