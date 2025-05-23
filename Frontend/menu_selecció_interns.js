@@ -1,5 +1,6 @@
 import { API_BASE_URL } from './config.js';
-document.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', function () {
   const token = localStorage.getItem('token');
 
   if (!token) {
@@ -10,17 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const selectDay = document.getElementById('select-day');
   const selectedUsersDiv = document.getElementById('selected-users');
 
-  selectDay.addEventListener('change', async function() {
+  selectDay.addEventListener('change', async function () {
     const selectedDay = selectDay.value;
-
     if (!selectedDay) return;
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/menu_seleccionat/selections/${selectedDay}`, {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
       });
 
       const data = await response.json();
@@ -29,8 +27,41 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedUsersDiv.innerHTML = "";
 
         if (data.users.length === 0) {
-          selectedUsersDiv.innerHTML += "<p>No hi ha seleccions per aquest dia.</p>";
+          selectedUsersDiv.innerHTML = "<p>No hi ha seleccions per aquest dia.</p>";
         } else {
+          const count = {
+            firstOption: {},
+            secondOption: {},
+            dessertOption: {}
+          };
+
+          data.users.forEach(user => {
+            ['firstOption', 'secondOption', 'dessertOption'].forEach(type => {
+              const value = user[type];
+              count[type][value] = (count[type][value] || 0) + 1;
+            });
+          });
+
+          const labels = {
+            firstOption: 'Primer plat',
+            secondOption: 'Segon plat',
+            dessertOption: 'Postres'
+          };
+
+          let summaryHTML = `
+            <div class="summary-block">
+              <h3>Resum de seleccions:</h3>
+              ${Object.entries(count).map(([category, options]) => (
+                Object.entries(options).map(([option, total]) =>
+                  `<div class="summary-line"><strong>${labels[category]}:</strong> ${option} → ${total}</div>`
+                ).join('')
+              )).join('')}
+              <hr style="border-top: 2px dashed #c31630; margin: 20px 0;">
+            </div>
+          `;
+
+          selectedUsersDiv.innerHTML += summaryHTML;
+
           data.users.forEach(user => {
             const userHTML = `
               <div class="user-card">
@@ -39,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Segon plat: ${user.secondOption}</p>
                 <p>Postres: ${user.dessertOption}</p>
               </div>
+              <hr style="border-top: 1px solid red; margin: 12px 0;">
             `;
             selectedUsersDiv.innerHTML += userHTML;
           });
@@ -61,14 +93,18 @@ document.addEventListener('DOMContentLoaded', function() {
           popup: 'swal-custom-error-popup',
           title: 'swal-custom-error-title',
           text: 'swal-custom-error-text',
-        }});
+        }
+      });
     }
   });
 });
+
 document.getElementById('pdf_gen').addEventListener('click', async () => {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  
+
+  doc.setFont("helvetica", "normal"); // ✅ Esto aplica la fuente normal
+
   const selectedDay = document.getElementById('select-day').value;
   const selectedUsersDiv = document.getElementById('selected-users');
 
@@ -81,29 +117,30 @@ document.getElementById('pdf_gen').addEventListener('click', async () => {
     return;
   }
 
-  // Encabezado
   doc.setFontSize(16);
   doc.text(`Informe del menú seleccionat`, 20, 20);
   doc.setFontSize(12);
   doc.text(`Data: ${selectedDay}`, 20, 30);
 
-  // Extraer datos del DOM
-  const paragraphs = selectedUsersDiv.querySelectorAll('p');
   let y = 40;
+  const blocks = selectedUsersDiv.querySelectorAll('.summary-block .summary-line, .user-card p');
 
-  paragraphs.forEach((p, index) => {
-    const text = p.innerText.split('\n');
-    text.forEach(line => {
-      if (y > 270) { // Nueva página si se pasa
-        doc.addPage();
-        y = 20;
-      }
-      doc.text(line, 20, y);
-      y += 7;
-    });
-    y += 3;
+  blocks.forEach((p, index) => {
+    const line = p.innerText;
+    if (y > 270) {
+      doc.addPage();
+      doc.setFont("helvetica", "normal"); // asegurar fuente en nuevas páginas
+      y = 20;
+    }
+    doc.text(line, 20, y);
+    y += 7;
+
+    if (p.parentElement.classList.contains('user-card') && p.nextElementSibling === null && y <= 270) {
+      doc.setDrawColor(195, 22, 48);
+      doc.line(20, y, 190, y);
+      y += 5;
+    }
   });
 
-  // Guardar el archivo
   doc.save(`menu_${selectedDay}.pdf`);
 });
