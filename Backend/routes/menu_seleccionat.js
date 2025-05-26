@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 // Ruta para seleccionar menú
 router.post('/select', authMiddleware, async (req, res) => {
-  const { day, firstOption, secondOption, dessertOption } = req.body;
+  const { day, firstOption, secondOption, dessertOption, ubicacio } = req.body;
   const userId = req.user.id;
 
   try {
@@ -29,7 +29,7 @@ router.post('/select', authMiddleware, async (req, res) => {
       return res.status(400).json({ message: 'Ja has seleccionat menú per aquest dia.' });
     }
 
-    const userSelection = { userId, day, firstOption, secondOption, dessertOption };
+    const userSelection = { userId, day, firstOption, secondOption, dessertOption, ubicacio  };
 
     await User.findByIdAndUpdate(userId, {
       $push: { selectedMenus: userSelection }
@@ -69,7 +69,8 @@ router.get('/selections/:day', authMiddleware, async (req, res) => {
             name: user.name,
             firstOption: selection.firstOption,
             secondOption: selection.secondOption,
-            dessertOption: selection.dessertOption
+            dessertOption: selection.dessertOption,
+            ubicacio: selection.ubicacio
           });
         }
       });
@@ -106,7 +107,7 @@ router.get('/check/:day', authMiddleware, async (req, res) => {
 
 // Ruta per modificar selecció d'un usuari per un dia futur
 router.put('/update', authMiddleware, async (req, res) => {
-  const { day, firstOption, secondOption, dessertOption } = req.body;
+  const { day, firstOption, secondOption, dessertOption, ubicacio } = req.body;
   const userId = req.user.id;
 
   try {
@@ -140,6 +141,7 @@ router.put('/update', authMiddleware, async (req, res) => {
     selection.firstOption = firstOption;
     selection.secondOption = secondOption;
     selection.dessertOption = dessertOption;
+    selection.ubicacio = ubicacio;
 
     await user.save();
     res.status(200).json({ message: 'Selecció modificada amb èxit' });

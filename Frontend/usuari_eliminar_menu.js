@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('firstOption').textContent = data.firstOption;
         document.getElementById('secondOption').textContent = data.secondOption;
         document.getElementById('dessertOption').textContent = data.dessertOption;
+        document.getElementById('ubicacio').textContent = data.ubicacio;
         menuDetails.style.display = 'block';
   
         // Comprobar si la fecha es posterior a hoy

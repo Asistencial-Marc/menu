@@ -10,12 +10,16 @@
 <body>
   <div class="container">
     <div class="top-buttons">
-            <div class="logo-box">
-                <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
-            </div>
-            <button onclick="window.history.back()"><img src="media/logotip_enrere_transparent_32x32.png" alt=""></button>
-            <button class="tancament-sesio"><img src="media/logout_icon_32x32_transparent.png" alt=""></button>
-        </div>
+      <div class="logo-box">
+        <img src="media/Hospital-Grup.png" alt="Logo" class="logo-img">
+      </div>
+      <button onclick="window.history.back()">
+        <img src="media/logotip_enrere_transparent_32x32.png" alt="">
+      </button>
+      <button class="tancament-sesio">
+        <img src="media/logout_icon_32x32_transparent.png" alt="">
+      </button>
+    </div>
 
     <h2>Modificar selecció de menú</h2>
 
@@ -31,6 +35,19 @@
 
       <label for="dessertOption">Postres:</label>
       <select id="dessertOption" required></select>
+
+      <label for="ubicacio">Ubicació:</label>
+      <select id="ubicacio" required>
+        <option value="">Selecciona una ubicació</option>
+        <option value="Planta -1">Planta -1</option>
+        <option value="Planta Baixa">Planta Baixa</option>
+        <option value="Planta 1">Planta 1</option>
+        <option value="Planta 2">Planta 2</option>
+        <option value="Planta 3">Planta 3</option>
+        <option value="Planta 4">Planta 4</option>
+        <option value="Planta 5">Planta 5</option>
+        <option value="Planta 6">Planta 6</option>
+      </select>
 
       <button type="submit">Guardar canvis</button>
     </form>

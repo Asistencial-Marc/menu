@@ -23,61 +23,60 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const data = await response.json();
 
-      if (response.ok) {
-        selectedUsersDiv.innerHTML = "";
+      selectedUsersDiv.innerHTML = "";
 
-        if (data.users.length === 0) {
-          selectedUsersDiv.innerHTML = "<p>No hi ha seleccions per aquest dia.</p>";
-        } else {
-          const count = {
-            firstOption: {},
-            secondOption: {},
-            dessertOption: {}
-          };
-
-          data.users.forEach(user => {
-            ['firstOption', 'secondOption', 'dessertOption'].forEach(type => {
-              const value = user[type];
-              count[type][value] = (count[type][value] || 0) + 1;
-            });
-          });
-
-          const labels = {
-            firstOption: 'Primer plat',
-            secondOption: 'Segon plat',
-            dessertOption: 'Postres'
-          };
-
-          let summaryHTML = `
-            <div class="summary-block">
-              <h3>Resum de seleccions:</h3>
-              ${Object.entries(count).map(([category, options]) => (
-                Object.entries(options).map(([option, total]) =>
-                  `<div class="summary-line"><strong>${labels[category]}:</strong> ${option} → ${total}</div>`
-                ).join('')
-              )).join('')}
-              <hr style="border-top: 2px dashed #c31630; margin: 20px 0;">
-            </div>
-          `;
-
-          selectedUsersDiv.innerHTML += summaryHTML;
-
-          data.users.forEach(user => {
-            const userHTML = `
-              <div class="user-card">
-                <p><strong>${user.name}</strong></p>
-                <p>Primer plat: ${user.firstOption}</p>
-                <p>Segon plat: ${user.secondOption}</p>
-                <p>Postres: ${user.dessertOption}</p>
-              </div>
-              <hr style="border-top: 1px solid red; margin: 12px 0;">
-            `;
-            selectedUsersDiv.innerHTML += userHTML;
-          });
-        }
-      } else {
-        selectedUsersDiv.innerHTML = "<p>Error al carregar les seleccions.</p>";
+      if (!response.ok || data.users.length === 0) {
+        selectedUsersDiv.innerHTML = "<p>No hi ha seleccions per aquest dia.</p>";
+        return;
       }
+
+      const count = {
+        firstOption: {},
+        secondOption: {},
+        dessertOption: {}
+      };
+
+      data.users.forEach(user => {
+        ['firstOption', 'secondOption', 'dessertOption'].forEach(type => {
+          const value = user[type];
+          count[type][value] = (count[type][value] || 0) + 1;
+        });
+      });
+
+      const labels = {
+        firstOption: 'Primer plat',
+        secondOption: 'Segon plat',
+        dessertOption: 'Postres'
+      };
+
+      const summaryHTML = `
+        <div class="summary-block">
+          <h3>Resum de seleccions:</h3>
+          ${Object.entries(count).map(([category, options]) =>
+            Object.entries(options).map(([option, total]) =>
+              `<div class="summary-line"><strong>${labels[category]}:</strong> ${option} → ${total}</div>`
+            ).join('')
+          ).join('')}
+          <hr style="border-top: 2px dashed #c31630; margin: 20px 0;">
+        </div>
+      `;
+
+      selectedUsersDiv.innerHTML += summaryHTML;
+
+      data.users.forEach(user => {
+        const userHTML = `
+          <div class="user-card">
+            <p><strong>${user.name}</strong></p>
+            <p>Primer plat: ${user.firstOption}</p>
+            <p>Segon plat: ${user.secondOption}</p>
+            <p>Postres: ${user.dessertOption}</p>
+            <p><em>Ubicació: ${user.ubicacio || 'No especificada'}</em></p>
+          </div>
+          <hr style="border-top: 1px solid red; margin: 12px 0;">
+        `;
+        selectedUsersDiv.innerHTML += userHTML;
+      });
+
     } catch (error) {
       console.error('Error en la solicitud:', error);
       selectedUsersDiv.innerHTML = "<p>Error de connexió amb el servidor.</p>";
@@ -97,50 +96,51 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   });
-});
 
-document.getElementById('pdf_gen').addEventListener('click', async () => {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  // Generar PDF
+  document.getElementById('pdf_gen').addEventListener('click', async () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFont("helvetica", "normal");
 
-  doc.setFont("helvetica", "normal"); // ✅ Esto aplica la fuente normal
+    const selectedDay = document.getElementById('select-day').value;
+    const selectedUsersDiv = document.getElementById('selected-users');
 
-  const selectedDay = document.getElementById('select-day').value;
-  const selectedUsersDiv = document.getElementById('selected-users');
+    if (!selectedDay || !selectedUsersDiv.innerText.trim()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Cap informació',
+        text: 'Selecciona un dia amb seleccions abans de generar el PDF',
+      });
+      return;
+    }
 
-  if (!selectedDay || !selectedUsersDiv.innerText.trim()) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Cap informació',
-      text: 'Selecciona un dia amb seleccions abans de generar el PDF',
+    doc.setFontSize(16);
+    doc.text(`Informe del menú seleccionat`, 20, 20);
+    doc.setFontSize(12);
+    doc.text(`Data: ${selectedDay}`, 20, 30);
+
+    let y = 40;
+    const blocks = selectedUsersDiv.querySelectorAll('.summary-block .summary-line, .user-card p');
+
+    blocks.forEach((p) => {
+      const line = p.innerText;
+      if (y > 270) {
+        doc.addPage();
+        doc.setFont("helvetica", "normal");
+        y = 20;
+      }
+      doc.text(line, 20, y);
+      y += 7;
+
+      if (p.parentElement.classList.contains('user-card') &&
+          p.nextElementSibling === null && y <= 270) {
+        doc.setDrawColor(195, 22, 48);
+        doc.line(20, y, 190, y);
+        y += 5;
+      }
     });
-    return;
-  }
 
-  doc.setFontSize(16);
-  doc.text(`Informe del menú seleccionat`, 20, 20);
-  doc.setFontSize(12);
-  doc.text(`Data: ${selectedDay}`, 20, 30);
-
-  let y = 40;
-  const blocks = selectedUsersDiv.querySelectorAll('.summary-block .summary-line, .user-card p');
-
-  blocks.forEach((p, index) => {
-    const line = p.innerText;
-    if (y > 270) {
-      doc.addPage();
-      doc.setFont("helvetica", "normal"); // asegurar fuente en nuevas páginas
-      y = 20;
-    }
-    doc.text(line, 20, y);
-    y += 7;
-
-    if (p.parentElement.classList.contains('user-card') && p.nextElementSibling === null && y <= 270) {
-      doc.setDrawColor(195, 22, 48);
-      doc.line(20, y, 190, y);
-      y += 5;
-    }
+    doc.save(`menu_${selectedDay}.pdf`);
   });
-
-  doc.save(`menu_${selectedDay}.pdf`);
 });

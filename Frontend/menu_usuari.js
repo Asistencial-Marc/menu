@@ -70,8 +70,10 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
   const firstOption = document.getElementById('firstOption').value;
   const secondOption = document.getElementById('secondOption').value;
   const dessertOption = document.getElementById('dessertOption').value;
+  const ubicacio = document.getElementById('ubicacio').value;
+
   console.log(selectedDate , " ", firstOption, " ", secondOption, " " ,dessertOption);
-  if (!firstOption || !secondOption || !dessertOption) {
+  if (!firstOption || !secondOption || !dessertOption || !ubicacio) {
     console.log('Si us plau, selecciona totes les opcions del menú.');
     Swal.fire({
       title: `Ups.`,
@@ -121,7 +123,8 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
       day: selectedDate,
       firstOption,
       secondOption,
-      dessertOption
+      dessertOption,
+      ubicacio
     })
   });
 

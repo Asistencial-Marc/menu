@@ -36,7 +36,8 @@ const UserSchema = new mongoose.Schema({
     day: { type: Date }, 
     firstOption: { type: String }, 
     secondOption: { type: String }, 
-    dessertOption: { type: String } 
+    dessertOption: { type: String } ,
+    ubicacio: { type: String }
   }],
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date }
