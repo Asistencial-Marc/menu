@@ -13,37 +13,35 @@ const createMenu = async (req, res) => {
       dessertOption2
     } = req.body;
 
-    // Normalizar la fecha al inicio del día (en hora local del servidor)
-    const dayDate = new Date(day);
-    dayDate.setHours(0, 0, 0, 0);
+    // Convertir YYYY-MM-DD a fecha UTC sin desfase horario
+    const [year, month, date] = day.split('-').map(Number);
+    const dayDate = new Date(Date.UTC(year, month - 1, date));
 
     // Verificar si ya existe un menú para esa fecha exacta
     const existingMenu = await Menu.findOne({ day: dayDate });
-    console.log("Buscando menú para:", day);
+
     if (existingMenu) {
       return res.status(409).json({ message: 'Ja existeix un menú per aquest dia' });
     }
-    else if (!existingMenu){
 
-      // Crear nuevo menú
-      const newMenu = new Menu({
-        day: dayDate,
-        firstOption,
-        firstOption2,
-        secondOption,
-        secondOption2,
-        dessertOption,
-        dessertOption2
-      });
+    // Crear nuevo menú
+    const newMenu = new Menu({
+      day: dayDate,
+      firstOption,
+      firstOption2,
+      secondOption,
+      secondOption2,
+      dessertOption,
+      dessertOption2
+    });
 
-      await newMenu.save();
-      res.status(201).json(newMenu);
-    }
-    } catch (error) {
-      res.status(500).json({
-        message: 'Error al registrar el menú',
-        error: error.message
-      });
+    await newMenu.save();
+    res.status(201).json(newMenu);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error al registrar el menú',
+      error: error.message
+    });
   }
 };
 
@@ -52,11 +50,10 @@ const getMenuByDay = async (req, res) => {
   try {
     const { day } = req.params;
 
-    const startDate = new Date(day);
-    startDate.setHours(0, 0, 0, 0);
-
-    const endDate = new Date(day);
-    endDate.setHours(23, 59, 59, 999);
+    const [year, month, date] = day.split('-').map(Number);
+    const startDate = new Date(Date.UTC(year, month - 1, date));
+    const endDate = new Date(Date.UTC(year, month - 1, date));
+    endDate.setUTCHours(23, 59, 59, 999);
 
     const menu = await Menu.findOne({
       day: {
@@ -76,7 +73,7 @@ const getMenuByDay = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error interno del servidor', error: error.message });
+    res.status(500).json({ message: 'Error intern del servidor', error: error.message });
   }
 };
 
@@ -92,18 +89,14 @@ const updateMenuByDay = async (req, res) => {
       dessertOption2
     } = req.body;
 
-    const startDate = new Date(day);
-    startDate.setHours(0, 0, 0, 0);
-
-    const endDate = new Date(day);
-    endDate.setHours(23, 59, 59, 999);
+    const [year, month, date] = day.split('-').map(Number);
+    const startDate = new Date(Date.UTC(year, month - 1, date));
+    const endDate = new Date(Date.UTC(year, month - 1, date));
+    endDate.setUTCHours(23, 59, 59, 999);
 
     const menu = await Menu.findOneAndUpdate(
       {
-        day: {
-          $gte: startDate,
-          $lte: endDate
-        }
+        day: { $gte: startDate, $lte: endDate }
       },
       {
         firstOption,
@@ -115,7 +108,6 @@ const updateMenuByDay = async (req, res) => {
       },
       { new: true }
     );
-    
 
     if (!menu) {
       return res.status(404).json({ message: 'No s\'ha trobat cap menú per aquest dia' });
@@ -130,9 +122,9 @@ const updateMenuByDay = async (req, res) => {
 const getMenusByMonth = async (req, res) => {
   try {
     const { year, month } = req.params;
-    const start = new Date(`${year}-${month}-01`);
-    const end = new Date(start.getFullYear(), start.getMonth() + 1, 0);
-    end.setHours(23, 59, 59, 999);
+    const start = new Date(Date.UTC(year, month - 1, 1));
+    const end = new Date(Date.UTC(year, month, 0));
+    end.setUTCHours(23, 59, 59, 999);
 
     const menus = await Menu.find({ day: { $gte: start, $lte: end } });
 
@@ -142,5 +134,9 @@ const getMenusByMonth = async (req, res) => {
   }
 };
 
-
-module.exports = { createMenu, getMenuByDay, updateMenuByDay, getMenusByMonth };
+module.exports = {
+  createMenu,
+  getMenuByDay,
+  updateMenuByDay,
+  getMenusByMonth
+};

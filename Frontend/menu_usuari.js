@@ -70,7 +70,7 @@ document.getElementById('menu-selection-form').addEventListener('submit', async 
   const firstOption = document.getElementById('firstOption').value;
   const secondOption = document.getElementById('secondOption').value;
   const dessertOption = document.getElementById('dessertOption').value;
-
+  console.log(selectedDate , " ", firstOption, " ", secondOption, " " ,dessertOption);
   if (!firstOption || !secondOption || !dessertOption) {
     console.log('Si us plau, selecciona totes les opcions del menú.');
     Swal.fire({
