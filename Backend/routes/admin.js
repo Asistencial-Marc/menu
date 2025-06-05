@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const User = require('../models/User');
 const path = require('path');
 const importUsers = require('../scripts/importUsers');
 const authMiddleware = require('../middleware/authMiddleware');
@@ -54,4 +55,25 @@ router.post('/importar-usuaris',authMiddleware,requireAdmin,
   }
 );
 
+
+// ✅ Obtener lista de usuarios
+router.get('/llista-usuaris', authMiddleware, requireAdmin, async (req, res) => {
+  try {
+    const users = await User.find().select('name codi email _id');
+    res.json({ users });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtenir els usuaris', error: error.message });
+  }
+});
+
+// ✅ Eliminar usuario por ID
+router.delete('/eliminar-usuari/:id', authMiddleware, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
+    res.json({ message: 'Usuari eliminat correctament' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al eliminar l\'usuari', error: error.message });
+  }
+});
 module.exports = router;

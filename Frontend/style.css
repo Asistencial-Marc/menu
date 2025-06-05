@@ -256,3 +256,37 @@ input, select {
     margin: 5px 0;
     font-size: 14px;
 }
+
+#user-list {
+  display: flex;
+  flex-wrap: wrap;           /* Permite múltiples filas */
+  justify-content: center;   /* Centra horizontalmente */
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.user-card button {
+  margin-top: 10px;
+  background-color: #c31630;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-card button:hover {
+  background-color: #a31228;
+}
+
+#buscador {
+  padding: 10px;
+  width: 60%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  display: block;
+}
