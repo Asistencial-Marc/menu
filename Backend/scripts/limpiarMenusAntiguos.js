@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const Menu = require('../models/Menu');
 const User = require('../models/User');
 
-async function cleanOldMenus() {
-    console.log("📡 MONGO_URI leído:", process.env.MONGO_URI);
-  try {
+module.exports = async function limpiarMenusAntiguos() {
+    const now = new Date();
+    const Mesos2 = new Date();
+    Mesos2.setMonth(now.getMonth() - 2);
+    try {
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -15,11 +17,9 @@ async function cleanOldMenus() {
     const now = new Date();
     const Mesos2 = new Date(now.getFullYear(), now.getMonth() - 2, 1);
 
-    // Eliminar menús antiguos
     const deletedMenus = await Menu.deleteMany({ day: { $lt: Mesos2 } });
     console.log(`✅ Menús eliminados: ${deletedMenus.deletedCount}`);
 
-    // Limpiar menús antiguos de usuarios
     const users = await User.find({ 'selectedMenus.day': { $lt: Mesos2 } });
     for (const user of users) {
       const originalLength = user.selectedMenus.length;

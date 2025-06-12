@@ -5,6 +5,8 @@ const User = require('../models/User');
 const path = require('path');
 const importUsers = require('../scripts/importUsers');
 const authMiddleware = require('../middleware/authMiddleware');
+const limpiarMenusAntiguos = require('../scripts/limpiarMenusAntiguosDirecto');
+
 
 // Configuración de multer
 const storage = multer.diskStorage({
@@ -76,4 +78,16 @@ router.delete('/eliminar-usuari/:id', authMiddleware, requireAdmin, async (req, 
     res.status(500).json({ message: 'Error al eliminar l\'usuari', error: error.message });
   }
 });
+
+// Auto limpiar menus de la base de datos
+router.post('/limpiar', async (req, res) => {
+  try {
+    await limpiarMenusAntiguos();
+    res.status(200).send('✅ Limpieza ejecutada');
+  } catch (error) {
+    console.error('❌ Error al ejecutar limpieza:', error);
+    res.status(500).send('Error al ejecutar limpieza');
+  }
+});
+
 module.exports = router;
