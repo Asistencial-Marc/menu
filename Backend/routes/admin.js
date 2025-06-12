@@ -5,7 +5,7 @@ const User = require('../models/User');
 const path = require('path');
 const importUsers = require('../scripts/importUsers');
 const authMiddleware = require('../middleware/authMiddleware');
-const limpiarMenusAntiguos = require('../scripts/limpiarMenusAntiguosDirecto');
+const limpiarMenusAntiguos = require('../scripts/limpiarMenusAntiguos');
 
 
 // Configuración de multer
