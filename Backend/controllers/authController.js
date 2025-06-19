@@ -97,8 +97,7 @@ exports.forgotPassword = async (req, res) => {
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1h
         await user.save();
-
-        //http://localhost:5000/reset_password.html?token=${token}
+        
         const resetUrl = `https://menu-3io3.onrender.com/reset_password.html?token=${token}`;
 
         await transporter.sendMail({
@@ -144,3 +143,23 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({ message: 'Error en canviar la contrasenya' });
     }
 };
+
+exports.acceptaPolitica = async (req,res) => {
+    try {
+    await User.findByIdAndUpdate(req.user.id, {
+      politicaPrivacitatAcceptada: true
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    res.status(500).json({ message: 'Error actualitzant política' });
+  }
+}
+
+exports.informació_usuari = async (req,res) => {
+    try {
+    const user = await User.findById(req.user.id).select('role politicaPrivacitatAcceptada confidencialitatAcceptada');
+    res.json(user);
+    } catch (err) {
+    res.status(500).json({ message: 'Error obtenint dades' });
+  }
+}

@@ -18,3 +18,33 @@ document.getElementById("btnModificar").addEventListener("click", () => {
 document.getElementById("btn_veure_mes").addEventListener("click", () => {
     window.location.href = "/veure_dietas"; // cambia al nombre correcto si es otro
 });
+
+
+function mostrarModalPolitica() {
+  document.getElementById("modalPolitica").style.display = "flex";
+}
+
+function acceptarPolitica() {
+  fetch('/api/auth/acepta_politica', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token }
+  }).then(res => {
+    if (res.ok) {
+      document.getElementById("modalPolitica").style.display = "none";
+    } else {
+      alert("Error en acceptar la política de privacitat");
+    }
+  });
+}
+
+fetch('/api/auth/user-info', {
+  headers: { 'Authorization': 'Bearer ' + token }
+})
+.then(res => res.json())
+.then(user => {
+  if (!user.politicaPrivacitatAcceptada) {
+    mostrarModalPolitica();
+  } else if ((user.role === 'cocinero' || user.role === 'administrador') && !user.confidencialitatAcceptada) {
+    mostrarModalConfidencialitat();
+  }
+});

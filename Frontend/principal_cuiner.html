@@ -26,6 +26,30 @@
         </div>
         
     </div>
+
+    <!-- MODAL POLÍTICA -->
+<div id="modalPolitica" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background-color: rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:2rem; border-radius:8px; max-width:600px;">
+    <h2>Política de privacitat</h2>
+    <p>Per continuar utilitzant l’aplicació, has d’acceptar la política de privacitat.</p>
+    <p><a href="politica_privacitat.html" target="_blank">Llegir política de privacitat</a></p>
+    <button onclick="acceptarPolitica()">Accepto</button>
+  </div>
+</div>
+
+<!-- MODAL CONFIDENCIALITAT (només si aplica per rol) -->
+<div id="modalConfidencialitat" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background-color: rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:2rem; border-radius:8px; max-width:600px;">
+    <h2>Acord de confidencialitat</h2>
+    <p>
+      Declaro que no divulgaré dades sensibles, en faré un ús exclusivament professional, i respectaré la seva confidencialitat.
+    </p>
+    <button onclick="acceptarConfidencialitat()">Accepto</button>
+  </div>
+</div>
+
     <script src="principal_cuiner.js"></script>
     <script type="module" src="auth.js"></script>
 </body>

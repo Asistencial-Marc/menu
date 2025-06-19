@@ -1,18 +1,3 @@
-/**const mongoose = require('mongoose');
-
-const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  codi_empleat: { type: String, required: true},
-  role: { type: String, enum: ['cocinero', 'empleado', 'administrador'], required: true }
-});
-
-module.exports = mongoose.model('User', UserSchema);**/
-
-/**
- * Version nueva del Schema de los Usuarios
- */
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
@@ -40,7 +25,9 @@ const UserSchema = new mongoose.Schema({
     ubicacio: { type: String }
   }],
   resetPasswordToken: { type: String },
-  resetPasswordExpires: { type: Date }
+  resetPasswordExpires: { type: Date },
+  politicaPrivacitatAcceptada: { type: Boolean, default: false },
+  confidencialitatAcceptada: { type: Boolean, default: false }
 });
 
 // Añadir índices para mejorar el rendimiento de las consultas
