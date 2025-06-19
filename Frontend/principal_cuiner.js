@@ -1,4 +1,4 @@
-
+const token = localStorage.getItem('token');
 function logout() {
     localStorage.removeItem("token");
     window.location.href = "login.html";
@@ -48,3 +48,20 @@ fetch('/api/auth/user-info', {
     mostrarModalConfidencialitat();
   }
 });
+
+function mostrarModalConfidencialitat() {
+  document.getElementById("modalConfidencialitat").style.display = "flex";
+}
+
+function acceptarConfidencialitat() {
+  fetch('/api/auth/accepta_confidencialitat', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token }
+  }).then(res => {
+    if (res.ok) {
+      document.getElementById("modalConfidencialitat").style.display = "none";
+    } else {
+      alert("Error en acceptar l'acord de confidencialitat");
+    }
+  });
+}

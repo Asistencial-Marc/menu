@@ -163,3 +163,14 @@ exports.informació_usuari = async (req,res) => {
     res.status(500).json({ message: 'Error obtenint dades' });
   }
 }
+
+exports.acceptaConfidencialitat = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      confidencialitatAcceptada: true
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    res.status(500).json({ message: 'Error actualitzant confidencialitat' });
+  }
+};

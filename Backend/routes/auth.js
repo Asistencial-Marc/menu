@@ -14,6 +14,7 @@ router.post('/reset-password', authController.resetPassword);
 
 router.post('/acepta_politica', verifyToken, authController.acceptaPolitica);
 router.get('/user-info', verifyToken, authController.informació_usuari);
+router.post('/accepta_confidencialitat', verifyToken, authController.acceptaConfidencialitat);
 
 
 module.exports = router;

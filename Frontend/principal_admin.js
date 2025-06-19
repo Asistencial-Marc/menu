@@ -1,4 +1,4 @@
-
+const token = localStorage.getItem('token');
 document.getElementById("btnimport").addEventListener("click", () => {
     window.location.href = "/importar_usuaris"; // cambia al nombre correcto si es otro
 });
@@ -49,3 +49,20 @@ fetch('/api/auth/user-info', {
     mostrarModalConfidencialitat();
   }
 });
+
+function mostrarModalConfidencialitat() {
+  document.getElementById("modalConfidencialitat").style.display = "flex";
+}
+
+function acceptarConfidencialitat() {
+  fetch('/api/auth/accepta_confidencialitat', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token }
+  }).then(res => {
+    if (res.ok) {
+      document.getElementById("modalConfidencialitat").style.display = "none";
+    } else {
+      alert("Error en acceptar l'acord de confidencialitat");
+    }
+  });
+}
